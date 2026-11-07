@@ -1,0 +1,216 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-plex-mono);
+  --font-display: var(--font-fraunces);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  /* ── Flavor Jury biotech palette — botanical light ───── */
+  --color-ink: #f5f9f3;            /* page base — warm sage paper */
+  --color-ink-2: #fbfdfa;          /* raised panel */
+  --color-ink-3: #ffffff;          /* card */
+  --color-ink-4: #e7f0e5;          /* hover card / track */
+  --color-line: #dbe7d8;           /* hairline borders */
+  --color-cream: #14251b;          /* primary text — deep forest ink */
+  --color-bone: #3f574a;           /* muted text */
+  --color-dim: #5d7163;            /* faint text */
+  --color-bio: #0e7a52;            /* signature bio green */
+  --color-bio-deep: #0a5f40;
+  --color-bio-dim: #2f7a56;
+  --color-mint: #d8f2e2;           /* pale mint tint */
+  --color-amber: #b45309;          /* thermodynamic warning */
+  --color-ember: #c2410c;
+  --color-rose: #dc2626;           /* danger / restricted */
+  --color-lime: #4d7c0f;           /* dopamine pop */
+  --color-violet: #6d28d9;         /* neural accent */
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+}
+
+:root {
+  --radius: 1rem;
+  --background: #f5f9f3;
+  --foreground: #14251b;
+  --card: #ffffff;
+  --card-foreground: #14251b;
+  --popover: #ffffff;
+  --popover-foreground: #14251b;
+  --primary: #0e7a52;
+  --primary-foreground: #ffffff;
+  --secondary: #eaf3e8;
+  --secondary-foreground: #14251b;
+  --muted: #eaf3e8;
+  --muted-foreground: #5d7163;
+  --accent: #e3f1e6;
+  --accent-foreground: #14251b;
+  --destructive: #dc2626;
+  --border: #dbe7d8;
+  --input: #dbe7d8;
+  --ring: #0e7a52;
+  --sidebar: #fbfdfa;
+  --sidebar-foreground: #14251b;
+  --sidebar-primary: #0e7a52;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eaf3e8;
+  --sidebar-accent-foreground: #14251b;
+  --sidebar-border: #dbe7d8;
+  --sidebar-ring: #0e7a52;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ink text-cream;
+    font-feature-settings: "ss01" on, "cv11" on;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: rgba(14, 122, 82, 0.18);
+    color: #14251b;
+  }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #eef4ec; }
+  ::-webkit-scrollbar-thumb {
+    background: #cfe0cc;
+    border-radius: 8px;
+    border: 2px solid #eef4ec;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #0e7a52; }
+
+  input, textarea, select { font-size: 16px; } /* prevent iOS zoom */
+}
+
+/* ── Editorial helpers ─────────────────────────────────── */
+
+.font-display {
+  font-family: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  font-variation-settings: "SOFT" 30, "WONK" 1, "opsz" 72;
+  letter-spacing: -0.015em;
+}
+
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+
+/* technical caption — mono, tracked-out, uppercase */
+.caption {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* glassy panel — botanical light */
+.panel {
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.9), rgba(244, 250, 241, 0.96));
+  border: 1px solid rgba(14, 122, 82, 0.16);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1px 2px rgba(20, 37, 27, 0.04), 0 24px 48px -28px rgba(20, 37, 27, 0.18);
+}
+
+.hairline {
+  border-color: rgba(14, 122, 82, 0.14);
+}
+
+/* white cards float softly on the sage paper */
+.bg-ink-3 {
+  box-shadow: 0 1px 2px rgba(20, 37, 27, 0.04), 0 14px 34px -22px rgba(20, 37, 27, 0.14);
+}
+
+/* grain — organic film over the whole page */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 9s steps(6) infinite;
+}
+@keyframes grain-shift {
+  0%,100% { transform: translate(0,0); }
+  20% { transform: translate(-4%,3%); }
+  40% { transform: translate(3%,-5%); }
+  60% { transform: translate(-3%,4%); }
+  80% { transform: translate(4%,2%); }
+}
+
+/* animated conic ring used on scores & holo badges */
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.animate-spin-slow { animation: spin-slow 14s linear infinite; }
+
+@keyframes breathe {
+  0%,100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+.animate-breathe { animation: breathe 4.5s ease-in-out infinite; }
+
+@keyframes pulse-dot {
+  0%,100% { box-shadow: 0 0 0 0 rgba(14,122,82,0.4); }
+  70% { box-shadow: 0 0 0 9px rgba(14,122,82,0); }
+}
+.pulse-dot { animation: pulse-dot 2.2s cubic-bezier(0.4,0,0.6,1) infinite; }
+
+@keyframes drift {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+.animate-drift { animation: drift 7s ease-in-out infinite; }
+
+@keyframes flow-dash {
+  to { stroke-dashoffset: -28; }
+}
+.flow-dash { animation: flow-dash 1.4s linear infinite; }
+
+@keyframes shimmer-line {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(220%); }
+}
+
+/* focus visibility — WCAG */
+:focus-visible {
+  outline: 2px solid rgba(14, 122, 82, 0.75);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain::before, .animate-spin-slow, .animate-breathe, .animate-drift, .flow-dash { animation: none !important; }
+  html { scroll-behavior: auto; }
+}
